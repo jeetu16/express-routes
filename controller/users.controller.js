@@ -24,7 +24,7 @@ const getUser = async (req, res) => {
 const addUser = async (req, res) => {
 
     let users = JSON.parse(await fsPromises.readFile(path.join(__dirname, "..", "Data", 'users.json'), 'utf8'));
-    users = [...users, { "id": users.length + 1, ...req.body }]
+    users = [...users, { "id": users[users.length-1].id+1, ...req.body }]
     console.log(req.body)
     await fsPromises.writeFile(path.join(__dirname, "..", 'data', 'users.json'), JSON.stringify(users));
     res.status(201).json({ "message": "successfull added" })
